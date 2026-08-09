@@ -15,7 +15,7 @@
             </a>
 
             {{-- Desktop Links --}}
-            <div class="hidden md:flex items-center gap-1">
+            <div class="hidden md:flex items-center gap-2">
                 <a href="{{ route('home') }}" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('home') ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50' }}">
                     Beranda
                 </a>
@@ -27,6 +27,12 @@
                 </a>
                 <a href="{{ route('peta') }}" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('peta') ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50' }}">
                     Peta
+                </a>
+                <a href="/admin" class="ml-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-primary-700 bg-primary-50 border border-primary-200 hover:bg-primary-600 hover:text-white transition-colors" id="nav-admin-btn">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    Admin Panel
                 </a>
             </div>
 
@@ -54,6 +60,9 @@
             </a>
             <a href="{{ route('peta') }}" class="block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors {{ request()->routeIs('peta') ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-50' }}">
                 Peta
+            </a>
+            <a href="/admin" class="block px-4 py-2.5 rounded-lg text-sm font-medium text-primary-700 bg-primary-50 hover:bg-primary-100 transition-colors">
+                🔒 Admin Panel
             </a>
         </div>
     </div>

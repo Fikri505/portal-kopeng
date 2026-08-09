@@ -25,6 +25,7 @@
                     <li><a href="{{ route('umkm.index') }}" class="text-sm text-gray-400 hover:text-primary-400 transition-colors">UMKM</a></li>
                     <li><a href="{{ route('wisata.index') }}" class="text-sm text-gray-400 hover:text-primary-400 transition-colors">Wisata</a></li>
                     <li><a href="{{ route('peta') }}" class="text-sm text-gray-400 hover:text-primary-400 transition-colors">Peta</a></li>
+                    <li><a href="/admin" class="text-sm text-primary-400 hover:text-primary-300 transition-colors inline-flex items-center gap-1">🔒 Admin Panel</a></li>
                 </ul>
             </div>
 
