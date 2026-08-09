@@ -1,59 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Portal Digital UMKM & Wisata Desa Kopeng
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Portal informasi digital dan peta interaktif untuk UMKM (Usaha Mikro, Kecil, dan Menengah) serta destinasi wisata di Desa Kopeng, Kecamatan Getasan, Kabupaten Semarang, Jawa Tengah.
 
-## About Laravel
+## 🚀 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Halaman Beranda**: Hero banner, UMKM & wisata unggulan, pratinjau peta interaktif, serta CTA.
+- **Daftar & Detail UMKM**: Pencarian, filter kategori, detail informasi lengkap, tombol kontak WhatsApp langsung, dan tautan navigasi Google Maps.
+- **Daftar & Detail Wisata**: Pencarian, filter kategori, info harga tiket, fasilitas pendukung, serta tautan navigasi Google Maps.
+- **Peta Interaktif (Leaflet.js)**: Pemetaan seluruh lokasi UMKM dan wisata dengan penanda (marker) yang dapat difilter secara real-time.
+- **Admin Panel (Filament v5)**: Manajemen data UMKM, Wisata, dan Kategori secara dinamis dengan dukungan upload gambar, koordinat lokasi (latitude/longitude), dan status publikasi (publish/unpublish).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Stack Teknologi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend**: Laravel 12.x (PHP 8.2+)
+- **Admin Panel**: Filament v5
+- **Database**: MySQL / MariaDB (XAMPP)
+- **Frontend**: Laravel Blade + Tailwind CSS v4
+- **Peta Interaktif**: Leaflet.js & OpenStreetMap
+- **JavaScript**: Vanilla JS
 
-## Learning Laravel
+## 📦 Persyaratan Sistem
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- PHP >= 8.2 (dengan ekstensi `pdo_mysql`, `intl`, `mbstring`, `openssl`, `gd`)
+- Composer >= 2.9
+- Node.js >= v20 & npm >= 10
+- MySQL / MariaDB (XAMPP / Standalone)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🔧 Panduan Instalasi (Lokal)
 
-## Laravel Sponsors
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/Fikri505/portal-kopeng.git
+   cd portal-kopeng
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. **Instalasi Dependency PHP & Node.js**
+   ```bash
+   composer install
+   npm install
+   ```
 
-### Premium Partners
+3. **Konfigurasi Environment**
+   Salin file `.env.example` ke `.env` dan atur koneksi database:
+   ```env
+   APP_NAME="Portal Kopeng"
+   APP_URL=http://localhost:8000
+   APP_LOCALE=id
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=portal_kopeng
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-## Contributing
+4. **Generate App Key & Storage Symlink**
+   ```bash
+   php artisan key:generate
+   php artisan storage:link
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. **Migrasi Database & Seeding Data Awal**
+   ```bash
+   php artisan migrate --seed
+   ```
+   *Kredensial Admin default:*
+   - Email: `admin@portalkopeng.id`
+   - Password: `password`
 
-## Code of Conduct
+6. **Menjalankan Server Pengembang**
+   Jalankan server Laravel dan Vite secara bersamaan:
+   ```bash
+   php artisan serve
+   ```
+   Di terminal terpisah:
+   ```bash
+   npm run dev
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7. **Akses Aplikasi**
+   - Halaman Publik: [http://localhost:8000](http://localhost:8000)
+   - Admin Panel: [http://localhost:8000/admin](http://localhost:8000/admin)
 
-## Security Vulnerabilities
+## 🧪 Pengujian Otomatis
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Untuk menjalankan suite pengujian Laravel:
+```bash
+php artisan test
+```
 
-## License
+## 📝 Lisensi
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proyek MVP ini dikembangkan untuk program KKN Desa Kopeng. Open-source di bawah lisensi [MIT](LICENSE).

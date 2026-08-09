@@ -10,11 +10,11 @@ An admin panel allows village administrators to manage all data without editing 
 
 | Layer | Technology |
 |-------|-----------|
-| Backend | Laravel 11 |
+| Backend | Laravel 12 |
 | Frontend | Laravel Blade |
-| Styling | Tailwind CSS |
+| Styling | Tailwind CSS 4 |
 | Database | MySQL (MariaDB 10.4) |
-| Admin Panel | Filament |
+| Admin Panel | Filament v5 |
 | Interactive Map | Leaflet.js + OpenStreetMap |
 | Navigation | Google Maps URL |
 | JavaScript | Vanilla JS |
