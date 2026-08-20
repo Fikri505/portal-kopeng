@@ -13,11 +13,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create admin user
+        // Create Master Admin (Super Admin)
         User::create([
             'name' => 'Admin Portal Kopeng',
             'email' => 'admin@portalkopeng.id',
             'password' => bcrypt('password'),
+            'role' => 'super_admin',
+            'is_active' => true,
         ]);
 
         // ==========================================
