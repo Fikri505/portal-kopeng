@@ -88,7 +88,7 @@ class UmkmForm
                             ->imageEditor(),
                         Toggle::make('is_published')
                             ->label('Publikasikan')
-                            ->default(false),
+                            ->default(true),
                     ]),
             ]);
     }
