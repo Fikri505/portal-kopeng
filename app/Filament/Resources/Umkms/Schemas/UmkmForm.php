@@ -19,7 +19,7 @@ class UmkmForm
             ->components([
                 Section::make('Informasi Dasar')
                     ->columns(2)
-                    ->schema([
+                    ->components([
                         TextInput::make('name')
                             ->label('Nama UMKM')
                             ->required()
@@ -46,7 +46,7 @@ class UmkmForm
 
                 Section::make('Lokasi')
                     ->columns(2)
-                    ->schema([
+                    ->components([
                         TextInput::make('latitude')
                             ->required()
                             ->numeric()
@@ -63,7 +63,7 @@ class UmkmForm
 
                 Section::make('Kontak & Jam Operasional')
                     ->columns(2)
-                    ->schema([
+                    ->components([
                         TextInput::make('whatsapp')
                             ->label('WhatsApp')
                             ->maxLength(20)
@@ -79,7 +79,7 @@ class UmkmForm
                     ]),
 
                 Section::make('Media & Status')
-                    ->schema([
+                    ->components([
                         FileUpload::make('image')
                             ->label('Gambar')
                             ->image()

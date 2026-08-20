@@ -19,7 +19,7 @@ class TourismForm
             ->components([
                 Section::make('Informasi Dasar')
                     ->columns(2)
-                    ->schema([
+                    ->components([
                         TextInput::make('name')
                             ->label('Nama Wisata')
                             ->required()
@@ -46,7 +46,7 @@ class TourismForm
 
                 Section::make('Lokasi')
                     ->columns(2)
-                    ->schema([
+                    ->components([
                         TextInput::make('latitude')
                             ->required()
                             ->numeric()
@@ -63,7 +63,7 @@ class TourismForm
 
                 Section::make('Detail Wisata')
                     ->columns(2)
-                    ->schema([
+                    ->components([
                         TextInput::make('ticket_price')
                             ->label('Harga Tiket')
                             ->maxLength(255)
@@ -81,7 +81,7 @@ class TourismForm
 
                 Section::make('Kontak')
                     ->columns(2)
-                    ->schema([
+                    ->components([
                         TextInput::make('phone')
                             ->label('Telepon')
                             ->maxLength(20)
@@ -93,7 +93,7 @@ class TourismForm
                     ]),
 
                 Section::make('Media & Status')
-                    ->schema([
+                    ->components([
                         FileUpload::make('image')
                             ->label('Gambar')
                             ->image()
