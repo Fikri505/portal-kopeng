@@ -8,6 +8,7 @@ php artisan view:cache
 
 # Run migrations automatically on startup
 php artisan migrate --force
+php artisan db:seed --force || true
 
 # Storage link
 php artisan storage:link || true
