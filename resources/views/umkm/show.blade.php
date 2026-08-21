@@ -24,7 +24,7 @@
                 {{-- Image --}}
                 <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
                     @if($umkm->image)
-                        <img src="{{ asset('storage/' . $umkm->image) }}" alt="{{ $umkm->name }}" class="w-full h-full object-cover">
+                        <img src="{{ $umkm->image_url }}" alt="{{ $umkm->name }}" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full flex flex-col items-center justify-center text-gray-300">
                             <svg class="w-16 h-16 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

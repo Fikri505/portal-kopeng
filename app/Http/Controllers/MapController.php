@@ -28,7 +28,7 @@ class MapController extends Controller
                 'address' => $item->address,
                 'latitude' => (float) $item->latitude,
                 'longitude' => (float) $item->longitude,
-                'image' => $item->image ? asset('storage/' . $item->image) : null,
+                'image' => $item->image_url,
                 'url' => route('umkm.show', $item->slug),
                 'google_maps_url' => $item->google_maps_url,
             ]);
@@ -44,7 +44,7 @@ class MapController extends Controller
                 'address' => $item->address,
                 'latitude' => (float) $item->latitude,
                 'longitude' => (float) $item->longitude,
-                'image' => $item->image ? asset('storage/' . $item->image) : null,
+                'image' => $item->image_url,
                 'url' => route('wisata.show', $item->slug),
                 'google_maps_url' => $item->google_maps_url,
             ]);

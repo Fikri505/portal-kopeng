@@ -24,7 +24,7 @@
                 {{-- Image --}}
                 <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
                     @if($tourism->image)
-                        <img src="{{ asset('storage/' . $tourism->image) }}" alt="{{ $tourism->name }}" class="w-full h-full object-cover">
+                        <img src="{{ $tourism->image_url }}" alt="{{ $tourism->name }}" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full flex flex-col items-center justify-center text-gray-300">
                             <svg class="w-16 h-16 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -97,7 +97,9 @@ class TourismForm
                         FileUpload::make('image')
                             ->label('Gambar')
                             ->image()
+                            ->disk('public')
                             ->directory('wisata')
+                            ->visibility('public')
                             ->maxSize(2048)
                             ->imageEditor(),
                         Toggle::make('is_published')
