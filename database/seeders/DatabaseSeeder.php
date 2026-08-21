@@ -49,6 +49,10 @@ class DatabaseSeeder extends Seeder
             'Agrowisata',
             'Wisata Edukasi',
             'Camping & Outbound',
+            'Kuliner & View',
+            'Perdagangan / Wisata Blanja',
+            'Penginapan',
+            'Rekreasi',
         ];
 
         $wisataCats = [];
