@@ -5,7 +5,7 @@ namespace App\Models;
 use Database\Factories\TourismFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tourism extends Model
 {
@@ -13,7 +13,6 @@ class Tourism extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
         'name',
         'slug',
         'description',
@@ -39,11 +38,19 @@ class Tourism extends Model
     }
 
     /**
-     * Get the category this tourism destination belongs to.
+     * Get the categories this tourism destination belongs to.
      */
-    public function category(): BelongsTo
+    public function categories(): BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_tourism');
+    }
+
+    /**
+     * Backward-compatible accessor for primary category.
+     */
+    public function getCategoryAttribute(): ?Category
+    {
+        return $this->categories->first();
     }
 
     /**

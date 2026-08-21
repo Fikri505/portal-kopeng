@@ -14,13 +14,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create Master Admin (Super Admin)
-        User::create([
-            'name' => 'Admin Portal Kopeng',
-            'email' => 'admin@portalkopeng.id',
-            'password' => bcrypt('password'),
-            'role' => 'super_admin',
-            'is_active' => true,
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@portalkopeng.id'],
+            [
+                'name' => 'Admin Portal Kopeng',
+                'password' => bcrypt('password'),
+                'role' => 'super_admin',
+                'is_active' => true,
+            ]
+        );
 
         // ==========================================
         // UMKM Categories
@@ -34,11 +36,15 @@ class DatabaseSeeder extends Seeder
 
         $umkmCats = [];
         foreach ($umkmCategories as $name) {
-            $umkmCats[] = Category::create([
-                'name' => $name,
-                'slug' => Str::slug($name),
-                'type' => 'umkm',
-            ]);
+            $umkmCats[] = Category::firstOrCreate(
+                [
+                    'name' => $name,
+                    'type' => 'umkm',
+                ],
+                [
+                    'slug' => Str::slug($name),
+                ]
+            );
         }
 
         // ==========================================
@@ -57,11 +63,15 @@ class DatabaseSeeder extends Seeder
 
         $wisataCats = [];
         foreach ($wisataCategories as $name) {
-            $wisataCats[] = Category::create([
-                'name' => $name,
-                'slug' => Str::slug($name),
-                'type' => 'wisata',
-            ]);
+            $wisataCats[] = Category::firstOrCreate(
+                [
+                    'name' => $name,
+                    'type' => 'wisata',
+                ],
+                [
+                    'slug' => Str::slug($name),
+                ]
+            );
         }
 
         // ==========================================
@@ -171,20 +181,23 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($umkmData as $data) {
-            Umkm::create([
-                'category_id' => $umkmCats[$data['category']]->id,
-                'name' => $data['name'],
-                'slug' => Str::slug(str_replace('[Sample] ', '', $data['name'])),
-                'description' => $data['description'],
-                'address' => $data['address'],
-                'latitude' => $data['latitude'],
-                'longitude' => $data['longitude'],
-                'whatsapp' => $data['whatsapp'],
-                'instagram' => null,
-                'opening_hours' => $data['opening_hours'],
-                'image' => null,
-                'is_published' => true,
-            ]);
+            $slug = Str::slug(str_replace('[Sample] ', '', $data['name']));
+            $umkm = Umkm::firstOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'address' => $data['address'],
+                    'latitude' => $data['latitude'],
+                    'longitude' => $data['longitude'],
+                    'whatsapp' => $data['whatsapp'],
+                    'instagram' => null,
+                    'opening_hours' => $data['opening_hours'],
+                    'image' => null,
+                    'is_published' => true,
+                ]
+            );
+            $umkm->categories()->syncWithoutDetaching([$umkmCats[$data['category']]->id]);
         }
 
         // ==========================================
@@ -278,22 +291,25 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($tourismData as $data) {
-            Tourism::create([
-                'category_id' => $wisataCats[$data['category']]->id,
-                'name' => $data['name'],
-                'slug' => Str::slug(str_replace('[Sample] ', '', $data['name'])),
-                'description' => $data['description'],
-                'address' => $data['address'],
-                'latitude' => $data['latitude'],
-                'longitude' => $data['longitude'],
-                'phone' => $data['phone'],
-                'instagram' => null,
-                'opening_hours' => $data['opening_hours'],
-                'ticket_price' => $data['ticket_price'],
-                'facilities' => $data['facilities'],
-                'image' => null,
-                'is_published' => true,
-            ]);
+            $slug = Str::slug(str_replace('[Sample] ', '', $data['name']));
+            $tourism = Tourism::firstOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'address' => $data['address'],
+                    'latitude' => $data['latitude'],
+                    'longitude' => $data['longitude'],
+                    'phone' => $data['phone'],
+                    'instagram' => null,
+                    'opening_hours' => $data['opening_hours'],
+                    'ticket_price' => $data['ticket_price'],
+                    'facilities' => $data['facilities'],
+                    'image' => null,
+                    'is_published' => true,
+                ]
+            );
+            $tourism->categories()->syncWithoutDetaching([$wisataCats[$data['category']]->id]);
         }
     }
 }

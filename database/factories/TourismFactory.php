@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Tourism;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,7 +22,6 @@ class TourismFactory extends Factory
         $longitude = fake()->longitude(110.40, 110.45);
 
         return [
-            'category_id' => Category::factory(),
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => fake()->paragraphs(3, true),
@@ -54,6 +54,17 @@ class TourismFactory extends Factory
             'image' => null,
             'is_published' => true,
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Tourism $tourism) {
+            if ($tourism->categories()->count() === 0) {
+                $category = Category::where('type', 'wisata')->inRandomOrder()->first()
+                    ?? Category::factory()->create(['type' => 'wisata']);
+                $tourism->categories()->attach($category);
+            }
+        });
     }
 
     /**

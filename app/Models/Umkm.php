@@ -5,7 +5,7 @@ namespace App\Models;
 use Database\Factories\UmkmFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Umkm extends Model
 {
@@ -13,7 +13,6 @@ class Umkm extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
         'name',
         'slug',
         'description',
@@ -37,11 +36,19 @@ class Umkm extends Model
     }
 
     /**
-     * Get the category this UMKM belongs to.
+     * Get the categories this UMKM belongs to.
      */
-    public function category(): BelongsTo
+    public function categories(): BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'category_umkm');
+    }
+
+    /**
+     * Backward-compatible accessor for primary category.
+     */
+    public function getCategoryAttribute(): ?Category
+    {
+        return $this->categories->first();
     }
 
     /**

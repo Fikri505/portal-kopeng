@@ -12,10 +12,14 @@
         @endif
     </div>
     <div class="p-4">
-        @if($item->category)
-            <span class="inline-block text-xs font-medium text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full mb-2">
-                {{ $item->category->name }}
-            </span>
+        @if($item->categories && $item->categories->count() > 0)
+            <div class="flex flex-wrap gap-1.5 mb-2">
+                @foreach($item->categories as $cat)
+                    <span class="inline-block text-xs font-medium text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full">
+                        {{ $cat->name }}
+                    </span>
+                @endforeach
+            </div>
         @endif
         <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-1">
             {{ $item->name }}

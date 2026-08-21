@@ -10,13 +10,13 @@ class HomeController extends Controller
     public function index()
     {
         $featuredUmkm = Umkm::published()
-            ->with('category')
+            ->with('categories')
             ->latest()
             ->take(6)
             ->get();
 
         $featuredTourism = Tourism::published()
-            ->with('category')
+            ->with('categories')
             ->latest()
             ->take(6)
             ->get();
@@ -29,37 +29,37 @@ class HomeController extends Controller
     private function getMapLocations(): array
     {
         $umkm = Umkm::published()
-            ->with('category')
+            ->with('categories')
             ->get()
             ->map(fn ($item) => [
                 'id' => $item->id,
                 'name' => $item->name,
                 'type' => 'umkm',
-                'category' => $item->category->name ?? '-',
+                'category' => $item->categories->pluck('name')->join(', ') ?: '-',
                 'address' => $item->address,
                 'latitude' => (float) $item->latitude,
                 'longitude' => (float) $item->longitude,
-                'image' => $item->image ? asset('storage/' . $item->image) : null,
+                'image' => $item->image_url,
                 'url' => route('umkm.show', $item->slug),
                 'google_maps_url' => $item->google_maps_url,
             ]);
 
         $tourism = Tourism::published()
-            ->with('category')
+            ->with('categories')
             ->get()
             ->map(fn ($item) => [
                 'id' => $item->id,
                 'name' => $item->name,
                 'type' => 'wisata',
-                'category' => $item->category->name ?? '-',
+                'category' => $item->categories->pluck('name')->join(', ') ?: '-',
                 'address' => $item->address,
                 'latitude' => (float) $item->latitude,
                 'longitude' => (float) $item->longitude,
-                'image' => $item->image ? asset('storage/' . $item->image) : null,
+                'image' => $item->image_url,
                 'url' => route('wisata.show', $item->slug),
                 'google_maps_url' => $item->google_maps_url,
             ]);
 
-        return $umkm->merge($tourism)->toArray();
+        return $umkm->toBase()->merge($tourism)->toArray();
     }
 }

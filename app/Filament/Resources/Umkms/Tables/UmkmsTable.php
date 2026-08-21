@@ -26,9 +26,10 @@ class UmkmsTable
                     ->label('Nama')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('category.name')
+                TextColumn::make('categories.name')
                     ->label('Kategori')
-                    ->sortable(),
+                    ->badge()
+                    ->separator(', '),
                 TextColumn::make('address')
                     ->label('Alamat')
                     ->limit(30)
@@ -46,9 +47,11 @@ class UmkmsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('category_id')
+                SelectFilter::make('categories')
                     ->label('Kategori')
-                    ->relationship('category', 'name', fn ($query) => $query->where('type', 'umkm')),
+                    ->relationship('categories', 'name', fn ($query) => $query->where('type', 'umkm'))
+                    ->multiple()
+                    ->preload(),
                 TernaryFilter::make('is_published')
                     ->label('Status Publikasi'),
             ])

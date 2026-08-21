@@ -18,13 +18,13 @@ class MapController extends Controller
     public function locations()
     {
         $umkm = Umkm::published()
-            ->with('category')
+            ->with('categories')
             ->get()
             ->map(fn ($item) => [
                 'id' => $item->id,
                 'name' => $item->name,
                 'type' => 'umkm',
-                'category' => $item->category->name ?? '-',
+                'category' => $item->categories->pluck('name')->join(', ') ?: '-',
                 'address' => $item->address,
                 'latitude' => (float) $item->latitude,
                 'longitude' => (float) $item->longitude,
@@ -34,13 +34,13 @@ class MapController extends Controller
             ]);
 
         $tourism = Tourism::published()
-            ->with('category')
+            ->with('categories')
             ->get()
             ->map(fn ($item) => [
                 'id' => $item->id,
                 'name' => $item->name,
                 'type' => 'wisata',
-                'category' => $item->category->name ?? '-',
+                'category' => $item->categories->pluck('name')->join(', ') ?: '-',
                 'address' => $item->address,
                 'latitude' => (float) $item->latitude,
                 'longitude' => (float) $item->longitude,
@@ -49,6 +49,6 @@ class MapController extends Controller
                 'google_maps_url' => $item->google_maps_url,
             ]);
 
-        return response()->json($umkm->merge($tourism)->values());
+        return response()->json($umkm->toBase()->merge($tourism)->values());
     }
 }

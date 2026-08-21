@@ -37,8 +37,12 @@
 
                 {{-- Info --}}
                 <div>
-                    @if($umkm->category)
-                        <span class="inline-block text-xs font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full mb-3">{{ $umkm->category->name }}</span>
+                    @if($umkm->categories && $umkm->categories->count() > 0)
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            @foreach($umkm->categories as $cat)
+                                <span class="inline-block text-xs font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">{{ $cat->name }}</span>
+                            @endforeach
+                        </div>
                     @endif
                     <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{{ $umkm->name }}</h1>
 

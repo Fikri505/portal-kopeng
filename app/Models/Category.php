@@ -5,7 +5,7 @@ namespace App\Models;
 use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Category extends Model
 {
@@ -21,16 +21,16 @@ class Category extends Model
     /**
      * Get UMKM records belonging to this category.
      */
-    public function umkms(): HasMany
+    public function umkms(): BelongsToMany
     {
-        return $this->hasMany(Umkm::class);
+        return $this->belongsToMany(Umkm::class, 'category_umkm');
     }
 
     /**
      * Get tourism records belonging to this category.
      */
-    public function tourisms(): HasMany
+    public function tourisms(): BelongsToMany
     {
-        return $this->hasMany(Tourism::class);
+        return $this->belongsToMany(Tourism::class, 'category_tourism');
     }
 }

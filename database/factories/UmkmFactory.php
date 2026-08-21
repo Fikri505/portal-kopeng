@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Umkm;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,7 +22,6 @@ class UmkmFactory extends Factory
         $longitude = fake()->longitude(110.40, 110.45);
 
         return [
-            'category_id' => Category::factory(),
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => fake()->paragraphs(2, true),
@@ -40,6 +40,17 @@ class UmkmFactory extends Factory
             'image' => null,
             'is_published' => true,
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Umkm $umkm) {
+            if ($umkm->categories()->count() === 0) {
+                $category = Category::where('type', 'umkm')->inRandomOrder()->first()
+                    ?? Category::factory()->create(['type' => 'umkm']);
+                $umkm->categories()->attach($category);
+            }
+        });
     }
 
     /**

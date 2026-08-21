@@ -26,9 +26,10 @@ class TourismsTable
                     ->label('Nama')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('category.name')
+                TextColumn::make('categories.name')
                     ->label('Kategori')
-                    ->sortable(),
+                    ->badge()
+                    ->separator(', '),
                 TextColumn::make('ticket_price')
                     ->label('Harga Tiket')
                     ->toggleable(),
@@ -46,9 +47,11 @@ class TourismsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('category_id')
+                SelectFilter::make('categories')
                     ->label('Kategori')
-                    ->relationship('category', 'name', fn ($query) => $query->where('type', 'wisata')),
+                    ->relationship('categories', 'name', fn ($query) => $query->where('type', 'wisata'))
+                    ->multiple()
+                    ->preload(),
                 TernaryFilter::make('is_published')
                     ->label('Status Publikasi'),
             ])

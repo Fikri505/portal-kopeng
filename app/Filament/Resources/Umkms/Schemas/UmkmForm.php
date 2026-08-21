@@ -30,9 +30,10 @@ class UmkmForm
                             ->required()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
-                        Select::make('category_id')
+                        Select::make('categories')
                             ->label('Kategori')
-                            ->relationship('category', 'name', fn ($query) => $query->where('type', 'umkm'))
+                            ->relationship('categories', 'name', fn ($query) => $query->where('type', 'umkm'))
+                            ->multiple()
                             ->required()
                             ->preload(),
                         TextInput::make('address')
